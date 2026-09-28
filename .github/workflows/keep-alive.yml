@@ -1,0 +1,14 @@
+name: Render Keep Alive
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Acessar meu site
+        run: curl -L --fail --max-time 60 https://registro-produtos-anvisa.onrender.com/
