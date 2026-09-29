@@ -10,9 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Acessar meu site
+      - name: Acessar Render
         run: |
-          echo "Acessando o Render..."
-          curl -L --max-time 180 --retry 3 --retry-delay 10 \
-            -s -o /dev/null -w "HTTP Status: %{http_code}\n" \
+          echo "Iniciando ping..."
+          date -u
+
+          curl \
+            --location \
+            --max-time 180 \
+            --retry 3 \
+            --retry-delay 10 \
+            --silent \
+            --show-error \
+            --output /dev/null \
+            --write-out "HTTP: %{http_code}\nTempo: %{time_total}s\n" \
             https://registro-produtos-anvisa.onrender.com/
+
+          echo "Ping concluído."
